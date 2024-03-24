@@ -3,7 +3,7 @@ const fs = require('fs');
 const Koa = require('koa');
 const Router = require('koa-router');
 const cors = require('koa2-cors');
-const koaBody = require('koa-body');
+const { koaBody } = require('koa-body');
 
 const categories = JSON.parse(fs.readFileSync('./data/categories.json'));
 const items = JSON.parse(fs.readFileSync('./data/products.json'));
@@ -25,11 +25,11 @@ const randomNumber = (start, stop) => {
 const fortune = (ctx, body = null, status = 200) => {
     // Uncomment for delay
     // const delay = randomNumber(1, 10) * 1000;
-    const delay = 0;
+    const delay = 2000;
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             // Uncomment for error generation
-            // if (Math.random() > 0.8) {
+            // if (Math.random() > 0.9) {
             //     reject(new Error('Something bad happened'));
             //     return;
             // }
@@ -118,3 +118,4 @@ app.use(router.allowedMethods());
 const port = process.env.PORT || 7070;
 const server = http.createServer(app.callback());
 server.listen(port);
+console.log('server started')
